@@ -1,0 +1,101 @@
+id,jurusan_smk,mapel_favorit,hobi_spesifik,tipe_kerja,sosial,target_industri,rekomendasi_jurusan_kuliah
+1,Rekayasa Perangkat Lunak (RPL),Matematika,Coding,Layar Komputer,Tim,Teknologi,Teknik Informatika
+2,Rekayasa Perangkat Lunak (RPL),Bahasa Inggris,Mendesain,Layar Komputer,Mandiri,Industri Kreatif,Sistem Informasi
+3,Teknik Komputer Dan Jaringan (TKJ),Fisika,Merakit Komputer,Layar Komputer,Tim,Teknologi,Teknik Komputer
+4,Teknik Komputer Dan Jaringan (TKJ),Matematika,Problem Solving,Lapangan,Tim,Teknologi,Teknik Telekomunikasi
+5,Desain Komunikasi Visual (DKV),Seni Budaya,Menggambar,Layar Komputer,Mandiri,Industri Kreatif,Desain Komunikasi Visual (DKV)
+6,Produksi Film (PRF),Seni Budaya,Fotografi/Video,Lapangan,Tim,Media,Televisi dan Film
+7,Teknik Audio Video (TAV),Fisika,Merakit Komputer,Studio,Tim,Media,Teknik Elektro
+8,Teknik Instalasi Dan Tenaga Listrik (TITL),Matematika,Memperbaiki Barang,Lapangan,Tim,Konstruksi,Teknik Elektro
+9,Teknik Instalasi Dan Tenaga Listrik (TITL),Fisika,Matematika Terapan,Lapangan,Mandiri,Manufaktur,Teknik Tenaga Listrik
+10,Teknik Pendingin Tata Udara Dan Pemanasan (TPTUP),Fisika,Memperbaiki Barang,Lapangan,Tim,Manufaktur,Teknik Mesin
+11,Teknik Pemesinan (TPM),Matematika,Mendesain 3D,Laboratorium,Mandiri,Manufaktur,Teknik Mesin
+12,Teknik Pemesinan (TPM),Fisika,Bongkar Mesin,Lapangan,Tim,Manufaktur,Teknik Industri
+13,Teknik Sepeda Motor (TSM),Fisika,Bongkar Mesin,Lapangan,Tim,Otomotif,Teknik Mesin
+14,Teknik Kendaraan Ringan (TKR),Fisika,Bongkar Mesin,Lapangan,Tim,Otomotif,Teknik Otomotif
+15,Desain Pemodelan Dan Informasi Bangunan (DPIB),Seni Budaya,Mendesain 3D,Layar Komputer,Mandiri,Konstruksi,Arsitektur
+16,Desain Pemodelan Dan Informasi Bangunan (DPIB),Matematika,Menghitung Struktur,Lapangan,Tim,Konstruksi,Teknik Sipil
+17,Teknik Konstruksi Dan Perumahan (TKP),Matematika,Manajemen Proyek,Lapangan,Tim,Konstruksi,Teknik Sipil
+18,Teknik Konstruksi Dan Perumahan (TKP),Fisika,Memperbaiki Barang,Lapangan,Tim,Konstruksi,Manajemen Konstruksi
+19,Rekayasa Perangkat Lunak (RPL),Matematika,Menganalisis Data,Layar Komputer,Mandiri,Teknologi,Sains Data
+20,Desain Komunikasi Visual (DKV),Seni Budaya,Menulis Cerita,Studio,Tim,Industri Kreatif,Animasi
+21,Rekayasa Perangkat Lunak (RPL),Seni Budaya,Fotografi Budaya,Lapangan,Mandiri,Riset,Antropologi Budaya
+22,Teknik Komputer Dan Jaringan (TKJ),Olahraga,Latihan Fisik,Lapangan,Tim,Pendidikan,Pendidikan Kepelatihan Olahraga
+23,Desain Komunikasi Visual (DKV),Matematika,Menganalisis Data,Layar Komputer,Mandiri,Teknologi,Sains Data
+24,Produksi Film (PRF),Ekonomi,Manajemen Bisnis,Studio,Tim,Bisnis,Manajemen
+25,Teknik Audio Video (TAV),Bahasa Inggris,Berkomunikasi,Lapangan,Tim,Pelayanan Publik,Hubungan Internasional
+26,Teknik Instalasi Dan Tenaga Listrik (TITL),Seni Budaya,Menata Ruang,Studio,Mandiri,Industri Kreatif,Desain Interior
+27,Teknik Pemesinan (TPM),Biologi,Bercocok Tanam,Lapangan,Mandiri,Pertanian,Agroteknologi
+28,Teknik Sepeda Motor (TSM),Bisnis,Berjualan,Lapangan,Mandiri,Bisnis,Kewirausahaan
+29,Teknik Kendaraan Ringan (TKR),Bahasa Indonesia,Menulis Berita,Lapangan,Mandiri,Media,Jurnalistik
+30,Desain Pemodelan Dan Informasi Bangunan (DPIB),Sejarah,Membaca Buku Sejarah,Lapangan,Tim,Riset,Arkeologi
+31,Teknik Konstruksi Dan Perumahan (TKP),Biologi,Merawat Tanaman,Lapangan,Tim,Pertanian,Agribisnis
+32,Rekayasa Perangkat Lunak (RPL),Ekonomi,Analisis Pasar,Layar Komputer,Mandiri,Bisnis,Akuntansi
+33,Desain Komunikasi Visual (DKV),Biologi,Mengamati Perilaku Manusia,Studio,Mandiri,Kesehatan,Psikologi
+34,Produksi Film (PRF),Sosiologi,Berdiskusi,Studio,Tim,Media,Ilmu Komunikasi
+35,Teknik Komputer Dan Jaringan (TKJ),Seni Budaya,Bermain Alat Musik,Studio,Mandiri,Hiburan,Seni Musik
+36,Teknik Pendingin Tata Udara Dan Pemanasan (TPTUP),Kimia,Penelitian Lingkungan,Laboratorium,Tim,Riset,Teknik Lingkungan
+37,Teknik Pemesinan (TPM),Bisnis,Negosiasi,Layar Komputer,Tim,Bisnis,Bisnis Digital
+38,Teknik Sepeda Motor (TSM),Seni Budaya,Menggambar Otomotif,Studio,Mandiri,Industri Kreatif,Desain Produk
+39,Teknik Kendaraan Ringan (TKR),PKn,Debat,Layar Komputer,Tim,Hukum,Ilmu Hukum
+40,Desain Pemodelan Dan Informasi Bangunan (DPIB),Matematika,Pemrograman,Layar Komputer,Mandiri,Teknologi,Teknik Informatika
+41,Rekayasa Perangkat Lunak (RPL),Seni Budaya,Desain UI/UX (Rasio Emas),Layar Komputer,Mandiri,Industri Kreatif,Desain Komunikasi Visual (DKV)
+42,Rekayasa Perangkat Lunak (RPL),Matematika,Keamanan Jaringan,Layar Komputer,Tim,Teknologi,Keamanan Siber
+43,Teknik Komputer Dan Jaringan (TKJ),Matematika,Pengelolaan Server,Layar Komputer,Mandiri,Teknologi,Sistem Informasi
+44,Teknik Komputer Dan Jaringan (TKJ),Fisika,Instalasi IoT,Lapangan,Tim,Teknologi,Teknik Komputer
+45,Desain Komunikasi Visual (DKV),Seni Budaya,Desain Karakter,Layar Komputer,Mandiri,Industri Kreatif,Animasi
+46,Desain Komunikasi Visual (DKV),Bahasa Inggris,Tipografi,Layar Komputer,Mandiri,Industri Kreatif,Desain Grafis
+47,Produksi Film (PRF),Bahasa Indonesia,Penulisan Naskah,Studio,Mandiri,Media,Televisi dan Film
+48,Produksi Film (PRF),Seni Budaya,Penyutradaraan,Lapangan,Tim,Media,Seni Teater
+49,Teknik Audio Video (TAV),Fisika,Sistem Broadcasting,Studio,Tim,Media,Teknik Telekomunikasi
+50,Teknik Audio Video (TAV),Seni Budaya,Sound Engineering,Studio,Tim,Hiburan,Seni Musik
+51,Teknik Instalasi Dan Tenaga Listrik (TITL),Fisika,Otomasi Industri,Lapangan,Tim,Manufaktur,Teknik Elektro
+52,Teknik Instalasi Dan Tenaga Listrik (TITL),Matematika,Perancangan Panel Listrik,Layar Komputer,Mandiri,Konstruksi,Teknik Elektro
+53,Teknik Pendingin Tata Udara Dan Pemanasan (TPTUP),Fisika,Sistem Termodinamika,Laboratorium,Tim,Manufaktur,Teknik Mesin
+54,Teknik Pendingin Tata Udara Dan Pemanasan (TPTUP),Matematika,Kalkulasi HVAC,Layar Komputer,Mandiri,Konstruksi,Teknik Sipil
+55,Teknik Pemesinan (TPM),Fisika,CNC Programming,Laboratorium,Mandiri,Manufaktur,Teknik Mesin
+56,Teknik Pemesinan (TPM),Matematika,Material Testing,Laboratorium,Tim,Manufaktur,Teknik Material
+57,Teknik Sepeda Motor (TSM),Fisika,Tuning Mesin,Lapangan,Mandiri,Otomotif,Teknik Mesin
+58,Teknik Sepeda Motor (TSM),Matematika,Manajemen Bengkel,Lapangan,Tim,Bisnis,Manajemen Bisnis
+59,Teknik Kendaraan Ringan (TKR),Fisika,Elektrifikasi Kendaraan,Laboratorium,Tim,Otomotif,Teknik Otomotif
+60,Teknik Kendaraan Ringan (TKR),Matematika,Sistem Hidrolik,Lapangan,Tim,Manufaktur,Teknik Mesin
+61,Desain Pemodelan Dan Informasi Bangunan (DPIB),Seni Budaya,Maket Arsitektur,Studio,Mandiri,Konstruksi,Arsitektur
+62,Desain Pemodelan Dan Informasi Bangunan (DPIB),Matematika,Perencanaan Kota,Layar Komputer,Tim,Pemerintahan,Perencanaan Wilayah dan Kota
+63,Teknik Konstruksi Dan Perumahan (TKP),Matematika,Estimasi Biaya Proyek,Layar Komputer,Mandiri,Konstruksi,Manajemen Konstruksi
+64,Teknik Konstruksi Dan Perumahan (TKP),Fisika,Uji Kelayakan Struktur,Lapangan,Tim,Konstruksi,Teknik Sipil
+65,Rekayasa Perangkat Lunak (RPL),Bahasa Inggris,Manajemen Tim Developer,Layar Komputer,Tim,Teknologi,Sistem Informasi
+66,Rekayasa Perangkat Lunak (RPL),Matematika,Pengembangan AI,Layar Komputer,Mandiri,Teknologi,Sains Data
+67,Teknik Komputer Dan Jaringan (TKJ),Fisika,Jaringan Nirkabel,Lapangan,Tim,Teknologi,Teknik Telekomunikasi
+68,Teknik Komputer Dan Jaringan (TKJ),Bahasa Inggris,Cloud Computing,Layar Komputer,Mandiri,Teknologi,Teknik Informatika
+69,Desain Komunikasi Visual (DKV),Seni Budaya,Fotografi Produk,Studio,Mandiri,Bisnis,Desain Komunikasi Visual (DKV)
+70,Desain Komunikasi Visual (DKV),Ekonomi,Digital Marketing,Layar Komputer,Tim,Bisnis,Ilmu Komunikasi
+71,Produksi Film (PRF),Seni Budaya,Editing Video,Layar Komputer,Mandiri,Media,Televisi dan Film
+72,Produksi Film (PRF),Bahasa Inggris,Jurnalistik Penyiaran,Lapangan,Tim,Media,Ilmu Komunikasi
+73,Teknik Audio Video (TAV),Fisika,Perakitan Amplifier,Laboratorium,Mandiri,Manufaktur,Teknik Elektro
+74,Teknik Audio Video (TAV),Matematika,Sistem Kontrol,Laboratorium,Tim,Manufaktur,Teknik Mekatronika
+75,Teknik Instalasi Dan Tenaga Listrik (TITL),Fisika,Energi Terbarukan,Lapangan,Tim,Riset,Teknik Tenaga Listrik
+76,Teknik Instalasi Dan Tenaga Listrik (TITL),Matematika,Estimasi Daya,Layar Komputer,Mandiri,Konstruksi,Teknik Elektro
+77,Teknik Pendingin Tata Udara Dan Pemanasan (TPTUP),Fisika,Desain Refrigerasi,Layar Komputer,Mandiri,Manufaktur,Teknik Mesin
+78,Teknik Pendingin Tata Udara Dan Pemanasan (TPTUP),Ekonomi,Manajemen Logistik Suhu Dingin,Layar Komputer,Tim,Bisnis,Manajemen Logistik
+79,Teknik Pemesinan (TPM),Fisika,Desain CAD/CAM,Layar Komputer,Mandiri,Manufaktur,Teknik Mesin
+80,Teknik Pemesinan (TPM),Bahasa Inggris,Quality Control,Laboratorium,Tim,Manufaktur,Teknik Industri
+81,Teknik Sepeda Motor (TSM),Fisika,Perakitan Komponen,Lapangan,Tim,Manufaktur,Teknik Industri
+82,Teknik Sepeda Motor (TSM),Seni Budaya,Modifikasi Visual,Studio,Mandiri,Otomotif,Desain Produk
+83,Teknik Kendaraan Ringan (TKR),Fisika,Sistem Rem ABS,Laboratorium,Tim,Otomotif,Teknik Otomotif
+84,Teknik Kendaraan Ringan (TKR),Ekonomi,Manajemen Dealer Otomotif,Layar Komputer,Tim,Bisnis,Manajemen
+85,Desain Pemodelan Dan Informasi Bangunan (DPIB),Seni Budaya,Desain Interior,Studio,Mandiri,Konstruksi,Desain Interior
+86,Desain Pemodelan Dan Informasi Bangunan (DPIB),Fisika,Mekanika Tanah,Lapangan,Tim,Konstruksi,Teknik Sipil
+87,Teknik Konstruksi Dan Perumahan (TKP),Seni Budaya,Konservasi Bangunan,Lapangan,Tim,Konstruksi,Arsitektur
+88,Teknik Konstruksi Dan Perumahan (TKP),Matematika,Penjadwalan Proyek,Layar Komputer,Mandiri,Konstruksi,Teknik Sipil
+89,Rekayasa Perangkat Lunak (RPL),Fisika,Pengembangan Game PC,Layar Komputer,Tim,Hiburan,Teknik Informatika
+90,Rekayasa Perangkat Lunak (RPL),Bahasa Inggris,Technical Writing,Layar Komputer,Mandiri,Teknologi,Sastra Inggris
+91,Teknik Komputer Dan Jaringan (TKJ),Matematika,Analisis Jaringan,Layar Komputer,Mandiri,Teknologi,Sains Data
+92,Teknik Komputer Dan Jaringan (TKJ),Ekonomi,Teknopreneurship,Layar Komputer,Tim,Bisnis,Kewirausahaan
+93,Desain Komunikasi Visual (DKV),Sejarah,Ilustrasi Sejarah,Studio,Mandiri,Edukasi,Desain Komunikasi Visual (DKV)
+94,Desain Komunikasi Visual (DKV),Seni Budaya,Motion Graphics,Layar Komputer,Mandiri,Media,Animasi
+95,Produksi Film (PRF),Fisika,Pencahayaan Studio,Studio,Tim,Media,Teknik Elektro
+96,Produksi Film (PRF),Seni Budaya,Desain Produksi,Studio,Tim,Industri Kreatif,Televisi dan Film
+97,Teknik Audio Video (TAV),Matematika,Pengolahan Sinyal Digital,Layar Komputer,Mandiri,Teknologi,Teknik Telekomunikasi
+98,Teknik Instalasi Dan Tenaga Listrik (TITL),Matematika,Audit Energi,Lapangan,Tim,Konsultan,Teknik Sistem Energi
+99,Teknik Pemesinan (TPM),Seni Budaya,Pembuatan Molding,Laboratorium,Tim,Manufaktur,Desain Produk
+100,Rekayasa Perangkat Lunak (RPL),Bahasa Inggris,Mobile App Development,Layar Komputer,Tim,Teknologi,Teknik Informatika

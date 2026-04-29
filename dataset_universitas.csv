@@ -1,0 +1,61 @@
+id_univ,jurusan_kuliah,nama_universitas,lokasi_provinsi,jenis_pt
+U01,Teknik Informatika,Universitas Udayana,Bali,PTN
+U02,Teknik Informatika,Institut Teknologi Bandung,Jawa Barat,Institut
+U03,Teknik Informatika,Universitas Primakara,Bali,PTS
+U04,Teknik Informatika,Telkom University,Jawa Barat,PTS
+U05,Sistem Informasi,Universitas Udayana,Bali,PTN
+U06,Sistem Informasi,Institut Teknologi Sepuluh Nopember,Jawa Timur,Institut
+U07,Sistem Informasi,Bina Nusantara (Binus),DKI Jakarta,PTS
+U08,Arsitektur,Universitas Udayana,Bali,PTN
+U09,Arsitektur,Universitas Warmadewa,Bali,PTS
+U10,Arsitektur,Universitas Gadjah Mada,DI Yogyakarta,PTN
+U11,Teknik Sipil,Politeknik Negeri Bali,Bali,Politeknik
+U12,Teknik Sipil,Universitas Brawijaya,Jawa Timur,PTN
+U13,Desain Komunikasi Visual (DKV),Institut Seni Indonesia Denpasar,Bali,Institut
+U14,Desain Komunikasi Visual (DKV),Institut Kesenian Jakarta,DKI Jakarta,Institut
+U15,Televisi dan Film,Institut Seni Indonesia Denpasar,Bali,Institut
+U16,Televisi dan Film,Universitas Padjadjaran,Jawa Barat,PTN
+U17,Teknik Mesin,Politeknik Negeri Bali,Bali,Politeknik
+U18,Teknik Mesin,Universitas Sebelas Maret,Jawa Tengah,PTN
+U19,Teknik Otomotif,Universitas Negeri Malang,Jawa Timur,PTN
+U20,Teknik Elektro,Politeknik Negeri Bali,Bali,Politeknik
+U21,Teknik Elektro,Universitas Indonesia,DKI Jakarta,PTN
+U22,Sains Data,Universitas Airlangga,Jawa Timur,PTN
+U23,Sains Data,Universitas Primakara,Bali,PTS
+U24,Antropologi Budaya,Universitas Udayana,Bali,PTN
+U25,Antropologi Budaya,Universitas Gadjah Mada,DI Yogyakarta,PTN
+U26,Sastra Inggris,Universitas Udayana,Bali,PTN
+U27,Pendidikan Kepelatihan Olahraga,Universitas Pendidikan Ganesha,Bali,PTN
+U28,Manajemen,Universitas Pendidikan Nasional (Undiknas),Bali,PTS
+U29,Manajemen,Universitas Indonesia,DKI Jakarta,PTN
+U30,Hubungan Internasional,Universitas Udayana,Bali,PTN
+U31,Hubungan Internasional,Universitas Padjadjaran,Jawa Barat,PTN
+U32,Desain Interior,Institut Seni Indonesia Denpasar,Bali,Institut
+U33,Agroteknologi,Universitas Udayana,Bali,PTN
+U34,Kewirausahaan,Universitas Brawijaya,Jawa Timur,PTN
+U35,Jurnalistik,Universitas Padjadjaran,Jawa Barat,PTN
+U36,Arkeologi,Universitas Udayana,Bali,PTN
+U37,Agribisnis,Universitas Udayana,Bali,PTN
+U38,Akuntansi,Universitas Mahasaraswati,Bali,PTS
+U39,Psikologi,Universitas Udayana,Bali,PTN
+U40,Ilmu Komunikasi,Universitas Airlangga,Jawa Timur,PTN
+U41,Seni Musik,Institut Seni Indonesia Yogyakarta,DI Yogyakarta,Institut
+U42,Teknik Lingkungan,Institut Teknologi Sepuluh Nopember,Jawa Timur,Institut
+U43,Bisnis Digital,Universitas Padjadjaran,Jawa Barat,PTN
+U44,Desain Produk,Institut Teknologi Bandung,Jawa Barat,Institut
+U45,Ilmu Hukum,Universitas Udayana,Bali,PTN
+U46,Keamanan Siber,Politeknik Siber dan Sandi Negara,Jawa Barat,Politeknik
+U47,Teknik Komputer,Universitas Brawijaya,Jawa Timur,PTN
+U48,Teknik Telekomunikasi,Telkom University,Jawa Barat,PTS
+U49,Animasi,Institut Seni Indonesia Denpasar,Bali,Institut
+U50,Desain Grafis,Universitas Negeri Malang,Jawa Timur,PTN
+U51,Seni Teater,Institut Seni Indonesia Denpasar,Bali,Institut
+U52,Teknik Tenaga Listrik,Institut Teknologi Bandung,Jawa Barat,Institut
+U53,Teknik Material,Institut Teknologi Bandung,Jawa Barat,Institut
+U54,Manajemen Bisnis,Institut Teknologi Sepuluh Nopember,Jawa Timur,Institut
+U55,Perencanaan Wilayah dan Kota,Universitas Gadjah Mada,DI Yogyakarta,PTN
+U56,Manajemen Konstruksi,Universitas Indonesia,DKI Jakarta,PTN
+U57,Teknik Mekatronika,Politeknik Elektronika Negeri Surabaya,Jawa Timur,Politeknik
+U58,Manajemen Logistik,Universitas Logistik dan Bisnis Internasional,Jawa Barat,PTS
+U59,Teknik Industri,Universitas Telkom,Jawa Barat,PTS
+U60,Teknik Sistem Energi,Institut Teknologi Sepuluh Nopember,Jawa Timur,Institut

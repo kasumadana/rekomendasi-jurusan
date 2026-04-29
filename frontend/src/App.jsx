@@ -12,22 +12,22 @@ import Icon from "./components/Icons";
 const API_URL = "http://localhost:5005/prediksi";
 
 const INITIAL_FORM = {
-  jurusan_smk:     "",
-  mapel_favorit:   [],   // array (checkbox)
-  hobi_spesifik:   "",
-  tipe_kerja:      "",
-  sosial:          "",
+  jurusan_smk: "",
+  mapel_favorit: [],   // array (checkbox)
+  hobi_spesifik: "",
+  tipe_kerja: "",
+  sosial: "",
   target_industri: "",
   lokasi_provinsi: "",
-  jenis_pt:        "",
+  jenis_pt: "",
 };
 
 export default function App() {
-  const [step,       setStep]       = useState(1);        // 1 | 2 | 3
-  const [formData,   setFormData]   = useState(INITIAL_FORM);
-  const [result,     setResult]     = useState(null);     // null = form, array = results
-  const [loading,    setLoading]    = useState(false);
-  const [error,      setError]      = useState(null);
+  const [step, setStep] = useState(1);        // 1 | 2 | 3
+  const [formData, setFormData] = useState(INITIAL_FORM);
+  const [result, setResult] = useState(null);     // null = form, array = results
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // ── Handlers ────────────────────────────────────────────────────────────────
 
@@ -50,9 +50,9 @@ export default function App() {
 
     try {
       const res = await fetch(API_URL, {
-        method:  "POST",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(payload),
+        body: JSON.stringify(payload),
       });
 
       if (!res.ok) {

@@ -1,9 +1,3 @@
-// src/components/Questionnaire.jsx
-// Multi-step quiz UI. Three steps:
-//   Step 1: Latar Belakang (jurusan_smk, mapel_favorit)
-//   Step 2: Eksplorasi Minat & Bakat (hobi, tipe_kerja, sosial, target_industri)
-//   Step 3: Parameter Logistik (lokasi_provinsi, jenis_pt)
-
 import Icon from "./Icons";
 import {
   JURUSAN_SMK_OPTIONS,
@@ -20,19 +14,19 @@ import {
 
 function RadioCardGroup({ name, options, value, onChange }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" role="radiogroup">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" role="radiogroup">
       {options.map((opt) => {
         const isSelected = value === opt.value;
         return (
           <label
             key={opt.value}
             className={`
-              relative flex items-center p-4 border rounded-xl cursor-pointer
-              transition-all duration-200 ease-in-out transform
+              relative flex items-center p-4 border-2 rounded-xl cursor-pointer
+              transition-all duration-200 ease-in-out transform min-h-[44px]
               ${
                 isSelected
-                  ? "border-blue-600 bg-blue-50 ring-1 ring-blue-600 shadow-sm"
-                  : "border-slate-200 bg-white hover:border-blue-300 hover:bg-slate-50 hover:-translate-y-0.5 hover:shadow-sm"
+                  ? "border-blue-600 bg-blue-50 shadow-sm"
+                  : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5"
               }
             `}
             title={opt.label}
@@ -51,7 +45,7 @@ function RadioCardGroup({ name, options, value, onChange }) {
                   <Icon name={opt.icon} className="w-5 h-5" />
                 </div>
               )}
-              <span className={`font-medium text-sm ${isSelected ? "text-blue-700" : "text-slate-700"}`}>
+              <span className={`font-medium text-sm leading-snug ${isSelected ? "text-blue-700" : "text-slate-600"}`}>
                 {opt.label}
               </span>
             </span>
@@ -70,19 +64,19 @@ function CheckboxTagGroup({ name, options, values, onChange }) {
     onChange(name, updated);
   };
   return (
-    <div className="flex flex-wrap gap-2" role="group">
+    <div className="flex flex-wrap gap-3" role="group">
       {options.map((opt) => {
         const isChecked = values.includes(opt);
         return (
           <label
             key={opt}
             className={`
-              inline-flex items-center px-4 py-2 border rounded-full cursor-pointer
-              transition-all duration-200 ease-in-out text-sm font-medium
+              inline-flex items-center px-5 py-2.5 border-2 rounded-xl cursor-pointer
+              transition-all duration-200 ease-in-out text-sm font-medium min-h-[44px]
               ${
                 isChecked
-                  ? "border-blue-600 bg-blue-50 text-blue-700 ring-1 ring-blue-600"
-                  : "border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:bg-slate-50 hover:-translate-y-0.5"
+                  ? "border-blue-600 bg-blue-50 text-blue-700 shadow-sm"
+                  : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5"
               }
             `}
           >
@@ -133,17 +127,50 @@ function SelectNative({ name, id, options, value, onChange, required }) {
 // ── Step 1 ───────────────────────────────────────────────────────────────────
 
 function StepBackground({ data, onChange }) {
+  const minatKuliahOptions = [
+    { value: "Ya", label: "Ya, ingin kuliah" },
+    { value: "Tidak", label: "Tidak ingin" },
+    { value: "Belum Tahu", label: "Belum tahu" },
+  ];
+
+  const lintasJurusanOptions = [
+    { value: "Sejalur", label: "Sejalur (Linier dengan SMK)" },
+    { value: "Lintas Jurusan", label: "Lintas Jurusan (Berbeda dengan SMK)" },
+  ];
+
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-slate-800 mb-2" id="step1-heading">Latar Belakang SMK-mu</h2>
+        <h2 className="text-2xl font-bold text-slate-800 mb-2" id="step1-heading">Survei & Latar Belakang</h2>
         <p className="text-slate-500">
-          Ceritakan sedikit tentang jurusan dan mata pelajaran favoritmu di SMK.
+          Jawab pertanyaan singkat ini untuk membantu kami menyesuaikan rekomendasi.
         </p>
       </div>
 
       <div className="space-y-8">
         <div className="flex flex-col gap-3">
+          <label className="font-semibold text-slate-700">Apakah kamu berencana lanjut kuliah?</label>
+          <RadioCardGroup
+            name="minat_kuliah"
+            options={minatKuliahOptions}
+            value={data.minat_kuliah}
+            onChange={onChange}
+          />
+        </div>
+
+        {data.minat_kuliah === "Ya" && (
+          <div className="flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
+            <label className="font-semibold text-slate-700">Jika Ya, apakah ingin jurusan sejalur atau lintas jurusan?</label>
+            <RadioCardGroup
+              name="lintas_jurusan"
+              options={lintasJurusanOptions}
+              value={data.lintas_jurusan}
+              onChange={onChange}
+            />
+          </div>
+        )}
+
+        <div className="flex flex-col gap-3 pt-4 border-t border-slate-100">
           <label htmlFor="jurusan_smk" className="font-semibold text-slate-700">
             Jurusan SMK Saat Ini
           </label>
@@ -276,7 +303,12 @@ function StepLogistik({ data, onChange }) {
 // ── Main Component ────────────────────────────────────────────────────────────
 
 export default function Questionnaire({ step, data, onChange, onNext, onBack, onSubmit, loading }) {
-  const isStep1Complete = !!data.jurusan_smk && data.mapel_favorit.length > 0;
+  const isStep1Complete = 
+    !!data.minat_kuliah && 
+    (data.minat_kuliah === "Ya" ? !!data.lintas_jurusan : true) &&
+    !!data.jurusan_smk && 
+    data.mapel_favorit.length > 0;
+    
   const isStep2Complete =
     !!data.hobi_spesifik && !!data.tipe_kerja && !!data.sosial && !!data.target_industri;
 
@@ -304,7 +336,7 @@ export default function Questionnaire({ step, data, onChange, onNext, onBack, on
         {step < 3 ? (
           <button
             type="button"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow active:scale-[0.98]"
             onClick={onNext}
             disabled={!canProceed}
             aria-label="Lanjut ke langkah berikutnya"
@@ -315,7 +347,7 @@ export default function Questionnaire({ step, data, onChange, onNext, onBack, on
         ) : (
           <button
             type="button"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-75 disabled:cursor-not-allowed shadow-sm hover:shadow"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-75 disabled:cursor-not-allowed shadow-sm hover:shadow active:scale-[0.98]"
             onClick={onSubmit}
             disabled={loading}
             aria-label="Kirim dan analisis dengan AI"
@@ -340,7 +372,7 @@ export default function Questionnaire({ step, data, onChange, onNext, onBack, on
 
       {step === 1 && !isStep1Complete && (
         <p className="mt-4 text-sm text-slate-400 text-center animate-in fade-in">
-          Pilih jurusan SMK dan minimal satu mata pelajaran untuk melanjutkan.
+          Lengkapi pertanyaan survei, jurusan SMK, dan mata pelajaran favorit.
         </p>
       )}
       {step === 2 && !isStep2Complete && (

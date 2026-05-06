@@ -1,55 +1,30 @@
-import Icon from "./Icons";
-import {
-  JURUSAN_SMK_OPTIONS,
-  MAPEL_OPTIONS,
-  HOBI_OPTIONS,
-  TIPE_KERJA_OPTIONS,
-  SOSIAL_OPTIONS,
-  INDUSTRI_OPTIONS,
-  PROVINSI_OPTIONS,
-  JENIS_PT_OPTIONS,
-} from "../data/options";
+import { ArrowLeft, ArrowRight, Sparkles, Loader2 } from "lucide-react";
 
-// ── Reusable sub-components ──────────────────────────────────────────────────
+// ── Komponen pembantu yang dapat digunakan kembali ────────────────────────────────
 
-function RadioCardGroup({ name, options, value, onChange }) {
+function RadioOptionGroup({ name, options, value, onChange }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" role="radiogroup">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {options.map((opt) => {
         const isSelected = value === opt.value;
         return (
-          <label
+          <button
             key={opt.value}
+            type="button"
+            onClick={() => onChange(name, opt.value)}
             className={`
-              relative flex items-center p-4 border-2 rounded-xl cursor-pointer
-              transition-all duration-200 ease-in-out transform min-h-[44px]
-              ${
-                isSelected
-                  ? "border-blue-600 bg-blue-50 shadow-sm"
-                  : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5"
+              flex flex-col items-start p-6 text-left border-2 transition-all duration-150 shadow-sm
+              ${isSelected 
+                ? "border-emerald-600 bg-emerald-50 text-emerald-950" 
+                : "border-zinc-300 hover:border-zinc-500 bg-white text-zinc-900"
               }
             `}
-            title={opt.label}
           >
-            <input
-              type="radio"
-              name={name}
-              value={opt.value}
-              className="sr-only"
-              checked={isSelected}
-              onChange={() => onChange(name, opt.value)}
-            />
-            <span className="flex items-center gap-3 w-full">
-              {opt.icon && (
-                <div className={`shrink-0 ${isSelected ? "text-blue-600" : "text-slate-400"}`}>
-                  <Icon name={opt.icon} className="w-5 h-5" />
-                </div>
-              )}
-              <span className={`font-medium text-sm leading-snug ${isSelected ? "text-blue-700" : "text-slate-600"}`}>
-                {opt.label}
-              </span>
+            <span className={`text-[10px] font-black uppercase tracking-[0.2em] mb-3 ${isSelected ? "text-emerald-700" : "text-zinc-500"}`}>
+              {opt.value}
             </span>
-          </label>
+            <span className="font-bold text-lg leading-tight">{opt.label}</span>
+          </button>
         );
       })}
     </div>
@@ -64,243 +39,54 @@ function CheckboxTagGroup({ name, options, values, onChange }) {
     onChange(name, updated);
   };
   return (
-    <div className="flex flex-wrap gap-3" role="group">
+    <div className="flex flex-wrap gap-3">
       {options.map((opt) => {
         const isChecked = values.includes(opt);
         return (
-          <label
+          <button
             key={opt}
+            type="button"
+            onClick={() => toggle(opt)}
             className={`
-              inline-flex items-center px-5 py-2.5 border-2 rounded-xl cursor-pointer
-              transition-all duration-200 ease-in-out text-sm font-medium min-h-[44px]
-              ${
-                isChecked
-                  ? "border-blue-600 bg-blue-50 text-blue-700 shadow-sm"
-                  : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5"
+              px-6 py-3 border-2 text-sm font-bold uppercase tracking-widest transition-all shadow-sm
+              ${isChecked 
+                ? "bg-blue-600 border-blue-600 text-white" 
+                : "bg-white border-zinc-300 text-zinc-600 hover:border-zinc-500 hover:text-zinc-900"
               }
             `}
           >
-            <input
-              type="checkbox"
-              className="sr-only"
-              checked={isChecked}
-              onChange={() => toggle(opt)}
-            />
-            <span>{opt}</span>
-          </label>
+            {opt}
+          </button>
         );
       })}
     </div>
   );
 }
 
-function SelectNative({ name, id, options, value, onChange, required }) {
+function SimpleSelect({ name, id, options, value, onChange, required }) {
   return (
-    <div className="relative">
+    <div className="relative group">
       <select
         name={name}
         id={id}
-        className="w-full appearance-none bg-white border border-slate-200 text-slate-700 py-3 px-4 pr-10 rounded-xl leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all cursor-pointer hover:border-slate-300"
+        className="w-full appearance-none bg-white border-2 border-zinc-300 text-zinc-900 py-5 px-6 font-bold uppercase tracking-widest text-xs focus:outline-none focus:border-emerald-600 transition-colors cursor-pointer shadow-sm"
         value={value}
         onChange={(e) => onChange(name, e.target.value)}
         required={required}
-        aria-required={required}
       >
-        <option value="" disabled>
-          Pilih salah satu...
-        </option>
+        <option value="" disabled>Pilih Opsi</option>
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
+          <option key={opt.value} value={opt.value}>{opt.label}</option>
         ))}
       </select>
-      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
-        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-        </svg>
+      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-6 text-zinc-500 group-hover:text-emerald-600 transition-colors">
+        <ArrowRight className="w-4 h-4 rotate-90" />
       </div>
     </div>
   );
 }
 
-// ── Step 1 ───────────────────────────────────────────────────────────────────
-
-function StepBackground({ data, onChange }) {
-  const minatKuliahOptions = [
-    { value: "Ya", label: "Ya, ingin kuliah" },
-    { value: "Tidak", label: "Tidak ingin" },
-    { value: "Belum Tahu", label: "Belum tahu" },
-  ];
-
-  const lintasJurusanOptions = [
-    { value: "Sejalur", label: "Sejalur (Linier dengan SMK)" },
-    { value: "Lintas Jurusan", label: "Lintas Jurusan (Berbeda dengan SMK)" },
-  ];
-
-  return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-slate-800 mb-2" id="step1-heading">Survei & Latar Belakang</h2>
-        <p className="text-slate-500">
-          Jawab pertanyaan singkat ini untuk membantu kami menyesuaikan rekomendasi.
-        </p>
-      </div>
-
-      <div className="space-y-8">
-        <div className="flex flex-col gap-3">
-          <label className="font-semibold text-slate-700">Apakah kamu berencana lanjut kuliah?</label>
-          <RadioCardGroup
-            name="minat_kuliah"
-            options={minatKuliahOptions}
-            value={data.minat_kuliah}
-            onChange={onChange}
-          />
-        </div>
-
-        {data.minat_kuliah === "Ya" && (
-          <div className="flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
-            <label className="font-semibold text-slate-700">Jika Ya, apakah ingin jurusan sejalur atau lintas jurusan?</label>
-            <RadioCardGroup
-              name="lintas_jurusan"
-              options={lintasJurusanOptions}
-              value={data.lintas_jurusan}
-              onChange={onChange}
-            />
-          </div>
-        )}
-
-        <div className="flex flex-col gap-3 pt-4 border-t border-slate-100">
-          <label htmlFor="jurusan_smk" className="font-semibold text-slate-700">
-            Jurusan SMK Saat Ini
-          </label>
-          <SelectNative
-            name="jurusan_smk"
-            id="jurusan_smk"
-            options={JURUSAN_SMK_OPTIONS}
-            value={data.jurusan_smk}
-            onChange={onChange}
-            required
-          />
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <label className="font-semibold text-slate-700">
-            Mata Pelajaran Favorit <span className="font-normal text-slate-400 ml-1 text-sm">(pilih semua yang kamu suka)</span>
-          </label>
-          <CheckboxTagGroup
-            name="mapel_favorit"
-            options={MAPEL_OPTIONS}
-            values={data.mapel_favorit}
-            onChange={onChange}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Step 2 ───────────────────────────────────────────────────────────────────
-
-function StepMinat({ data, onChange }) {
-  return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-slate-800 mb-2" id="step2-heading">Eksplorasi Minat & Bakat</h2>
-        <p className="text-slate-500">
-          Jawaban ini akan mendapatkan bobot tertinggi dalam penghitungan AI kami.
-        </p>
-      </div>
-
-      <div className="space-y-8">
-        <div className="flex flex-col gap-3">
-          <label className="font-semibold text-slate-700">Hobi atau Kegiatan yang Paling Kamu Nikmati</label>
-          <RadioCardGroup
-            name="hobi_spesifik"
-            options={HOBI_OPTIONS}
-            value={data.hobi_spesifik}
-            onChange={onChange}
-          />
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <label className="font-semibold text-slate-700">Tipe Lingkungan Kerja Impian</label>
-          <RadioCardGroup
-            name="tipe_kerja"
-            options={TIPE_KERJA_OPTIONS}
-            value={data.tipe_kerja}
-            onChange={onChange}
-          />
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <label className="font-semibold text-slate-700">Cara Kamu Paling Produktif</label>
-          <RadioCardGroup
-            name="sosial"
-            options={SOSIAL_OPTIONS}
-            value={data.sosial}
-            onChange={onChange}
-          />
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <label className="font-semibold text-slate-700">Target Industri Setelah Lulus</label>
-          <RadioCardGroup
-            name="target_industri"
-            options={INDUSTRI_OPTIONS}
-            value={data.target_industri}
-            onChange={onChange}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Step 3 ───────────────────────────────────────────────────────────────────
-
-function StepLogistik({ data, onChange }) {
-  return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-slate-800 mb-2" id="step3-heading">Parameter Pencarian Kampus</h2>
-        <p className="text-slate-500">
-          Opsional — biarkan kosong jika kamu terbuka untuk semua pilihan.
-        </p>
-      </div>
-
-      <div className="space-y-8">
-        <div className="flex flex-col gap-3">
-          <label htmlFor="lokasi_provinsi" className="font-semibold text-slate-700">
-            Preferensi Lokasi Provinsi
-          </label>
-          <SelectNative
-            name="lokasi_provinsi"
-            id="lokasi_provinsi"
-            options={PROVINSI_OPTIONS}
-            value={data.lokasi_provinsi}
-            onChange={onChange}
-          />
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <label htmlFor="jenis_pt" className="font-semibold text-slate-700">
-            Jenis Perguruan Tinggi
-          </label>
-          <SelectNative
-            name="jenis_pt"
-            id="jenis_pt"
-            options={JENIS_PT_OPTIONS}
-            value={data.jenis_pt}
-            onChange={onChange}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Main Component ────────────────────────────────────────────────────────────
+// ── Tahapan Kuesioner ────────────────────────────────────────────────────────
 
 export default function Questionnaire({ step, data, onChange, onNext, onBack, onSubmit, loading }) {
   const isStep1Complete = 
@@ -315,71 +101,227 @@ export default function Questionnaire({ step, data, onChange, onNext, onBack, on
   const canProceed = step === 1 ? isStep1Complete : step === 2 ? isStep2Complete : true;
 
   return (
-    <div>
-      {step === 1 && <StepBackground data={data} onChange={onChange} />}
-      {step === 2 && <StepMinat data={data} onChange={onChange} />}
-      {step === 3 && <StepLogistik data={data} onChange={onChange} />}
+    <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+      {step === 1 && (
+        <div className="space-y-16">
+          <div className="space-y-4">
+            <h2 className="text-4xl font-black uppercase tracking-tighter text-zinc-900">Latar Belakang Akademik</h2>
+            <p className="text-zinc-600 font-bold uppercase tracking-widest text-xs">Informasi dasar mengenai status pendidikan Anda saat ini.</p>
+          </div>
+          
+          <div className="space-y-12">
+            <div className="space-y-6">
+              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900 border-l-4 border-emerald-600 pl-4">01. Rencana Melanjutkan Kuliah?</label>
+              <RadioOptionGroup
+                name="minat_kuliah"
+                options={[
+                  { value: "Ya", label: "Melanjutkan ke Pendidikan Tinggi" },
+                  { value: "Tidak", label: "Langsung Memasuki Dunia Kerja" },
+                  { value: "Belum Tahu", label: "Belum Menentukan Pilihan" },
+                ]}
+                value={data.minat_kuliah}
+                onChange={onChange}
+              />
+            </div>
 
-      <div className="flex flex-col-reverse sm:flex-row justify-end items-center gap-4 mt-12 pt-6 border-t border-slate-100">
-        {step > 1 && (
+            {data.minat_kuliah === "Ya" && (
+              <div className="space-y-6">
+                <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900 border-l-4 border-blue-600 pl-4">02. Pilihan Jalur Pendidikan?</label>
+                <RadioOptionGroup
+                  name="lintas_jurusan"
+                  options={[
+                    { value: "Sejalur", label: "Tetap Sesuai Fokus SMK (Linier)" },
+                    { value: "Lintas Jurusan", label: "Berpindah Bidang (Lintas Jurusan)" },
+                  ]}
+                  value={data.lintas_jurusan}
+                  onChange={onChange}
+                />
+              </div>
+            )}
+
+            <div className="space-y-6">
+              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900 border-l-4 border-zinc-900 pl-4">03. Jurusan SMK Saat Ini</label>
+              <SimpleSelect
+                name="jurusan_smk"
+                options={[
+                  { value: "RPL", label: "Rekayasa Perangkat Lunak" },
+                  { value: "TKJ", label: "Teknik Komputer & Jaringan" },
+                  { value: "MM", label: "Multimedia / DKV" },
+                  { value: "TBSM", label: "Teknik Bisnis Sepeda Motor" },
+                  { value: "TKR", label: "Teknik Kendaraan Ringan" },
+                  { value: "AK", label: "Akuntansi" },
+                  { value: "PM", label: "Pemasaran" },
+                  { value: "OTKP", label: "Otomatisasi & Tata Kelola Perkantoran" },
+                ]}
+                value={data.jurusan_smk}
+                onChange={onChange}
+              />
+            </div>
+
+            <div className="space-y-6">
+              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900 border-l-4 border-zinc-900 pl-4">04. Mata Pelajaran Favorit</label>
+              <CheckboxTagGroup
+                name="mapel_favorit"
+                options={["Matematika", "Bahasa Inggris", "Fisika", "Biologi", "Seni Budaya", "Ekonomi", "Olahraga", "Sejarah", "Sosiologi"]}
+                values={data.mapel_favorit}
+                onChange={onChange}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {step === 2 && (
+        <div className="space-y-16">
+          <div className="space-y-4">
+            <h2 className="text-4xl font-black uppercase tracking-tighter text-zinc-900">Minat & Vokasi</h2>
+            <p className="text-zinc-600 font-bold uppercase tracking-widest text-xs">Memetakan minat personal ke dalam ekosistem industri yang relevan.</p>
+          </div>
+
+          <div className="space-y-12">
+            <div className="space-y-6">
+              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900 border-l-4 border-emerald-600 pl-4">01. Aktivitas Pilihan</label>
+              <RadioOptionGroup
+                name="hobi_spesifik"
+                options={[
+                  { value: "Coding/Logika", label: "Logika & Pengembangan Sistem" },
+                  { value: "Menggambar/Desain", label: "Seni Visual & Desain" },
+                  { value: "Otomotif/Mesin", label: "Teknik Mekanik & Otomotif" },
+                  { value: "Menghitung/Analisis", label: "Keuangan & Analisis Data" },
+                  { value: "Olahraga/Fisik", label: "Aktivitas Fisik & Olahraga" },
+                  { value: "Berinteraksi/Sosial", label: "Komunikasi & Hubungan Masyarakat" },
+                ]}
+                value={data.hobi_spesifik}
+                onChange={onChange}
+              />
+            </div>
+
+            <div className="space-y-6">
+              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900 border-l-4 border-blue-600 pl-4">02. Lingkungan Kerja Idaman</label>
+              <RadioOptionGroup
+                name="tipe_kerja"
+                options={[
+                  { value: "Kantor/Indoor", label: "Ruang Kantor (Indoor)" },
+                  { value: "Lapangan/Outdoor", label: "Operasional Lapangan (Outdoor)" },
+                  { value: "Studio Kreatif", label: "Studio Kreatif / Agensi" },
+                  { value: "Bengkel/Lab", label: "Laboratorium / Bengkel Kerja" },
+                ]}
+                value={data.tipe_kerja}
+                onChange={onChange}
+              />
+            </div>
+            
+            <div className="space-y-6">
+              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900 border-l-4 border-zinc-900 pl-4">03. Gaya Produktivitas</label>
+              <RadioOptionGroup
+                name="sosial"
+                options={[
+                  { value: "Mandiri", label: "Fokus Secara Mandiri" },
+                  { value: "Tim/Berkelompok", label: "Kolaborasi Dalam Tim" },
+                ]}
+                value={data.sosial}
+                onChange={onChange}
+              />
+            </div>
+
+            <div className="space-y-6">
+              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900 border-l-4 border-zinc-900 pl-4">04. Target Industri</label>
+              <RadioOptionGroup
+                name="target_industri"
+                options={[
+                  { value: "Teknologi", label: "Teknologi Informasi & Digital" },
+                  { value: "Industri Kreatif", label: "Media & Kreatif" },
+                  { value: "Manufaktur", label: "Manufaktur & Otomotif" },
+                  { value: "Bisnis/Keuangan", label: "Korporat & Keuangan" },
+                  { value: "Layanan Kesehatan", label: "Layanan Kesehatan & Medis" },
+                  { value: "Pendidikan", label: "Pendidikan & Riset" },
+                ]}
+                value={data.target_industri}
+                onChange={onChange}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {step === 3 && (
+        <div className="space-y-16">
+          <div className="space-y-4">
+            <h2 className="text-4xl font-black uppercase tracking-tighter text-zinc-900">Logistik Akhir</h2>
+            <p className="text-zinc-600 font-bold uppercase tracking-widest text-xs">Filter tambahan untuk hasil rekomendasi yang lebih presisi.</p>
+          </div>
+
+          <div className="space-y-12">
+            <div className="space-y-6">
+              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900 border-l-4 border-emerald-600 pl-4">01. Lokasi Pilihan</label>
+              <SimpleSelect
+                name="lokasi_provinsi"
+                options={[
+                  { value: "Bali", label: "Bali" },
+                  { value: "Jawa Timur", label: "Jawa Timur" },
+                  { value: "Jawa Tengah", label: "Jawa Tengah" },
+                  { value: "Jawa Barat", label: "Jawa Barat" },
+                  { value: "Jakarta", label: "DKI Jakarta" },
+                  { value: "Luar Jawa", label: "Luar Pulau Jawa" },
+                ]}
+                value={data.lokasi_provinsi}
+                onChange={onChange}
+              />
+            </div>
+
+            <div className="space-y-6">
+              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900 border-l-4 border-blue-600 pl-4">02. Jenis Institusi</label>
+              <SimpleSelect
+                name="jenis_pt"
+                options={[
+                  { value: "PTN", label: "Perguruan Tinggi Negeri (PTN)" },
+                  { value: "PTS", label: "Perguruan Tinggi Swasta (PTS)" },
+                  { value: "Institut", label: "Institut" },
+                  { value: "Politeknik", label: "Politeknik" },
+                ]}
+                value={data.jenis_pt}
+                onChange={onChange}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="mt-24 pt-12 border-t-2 border-zinc-300 flex flex-col-reverse md:flex-row items-center justify-between gap-8">
+        {step > 1 ? (
           <button
             type="button"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 font-medium text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-200"
             onClick={onBack}
-            aria-label="Kembali ke langkah sebelumnya"
+            className="group flex items-center gap-3 text-xs font-black uppercase tracking-widest text-zinc-500 hover:text-zinc-900 transition-colors"
           >
-            <Icon name="arrowLeft" className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Kembali
           </button>
-        )}
+        ) : <div />}
 
-        {step < 3 ? (
-          <button
-            type="button"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow active:scale-[0.98]"
-            onClick={onNext}
-            disabled={!canProceed}
-            aria-label="Lanjut ke langkah berikutnya"
-          >
-            Lanjut
-            <Icon name="arrowRight" className="w-5 h-5" />
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-75 disabled:cursor-not-allowed shadow-sm hover:shadow active:scale-[0.98]"
-            onClick={onSubmit}
-            disabled={loading}
-            aria-label="Kirim dan analisis dengan AI"
-          >
-            {loading ? (
-              <>
-                <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Menganalisis AI...
-              </>
-            ) : (
-              <>
-                Temukan Rekomendasiku
-                <Icon name="sparkles" className="w-5 h-5" />
-              </>
-            )}
-          </button>
-        )}
+        <div className="flex flex-col md:flex-row items-center gap-6 w-full md:w-auto">
+          {step < 3 ? (
+            <button
+              type="button"
+              onClick={onNext}
+              disabled={!canProceed}
+              className="w-full md:w-auto px-10 py-5 bg-emerald-600 text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-emerald-700 disabled:opacity-20 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-3 shadow-lg shadow-emerald-100"
+            >
+              Tahap Berikutnya
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={onSubmit}
+              disabled={loading}
+              className="w-full md:w-auto px-10 py-5 bg-emerald-600 text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-emerald-700 transition-all flex items-center justify-center gap-3 shadow-lg shadow-emerald-100"
+            >
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Sparkles className="w-4 h-4" /> Jalankan Diagnosis</>}
+            </button>
+          )}
+        </div>
       </div>
-
-      {step === 1 && !isStep1Complete && (
-        <p className="mt-4 text-sm text-slate-400 text-center animate-in fade-in">
-          Lengkapi pertanyaan survei, jurusan SMK, dan mata pelajaran favorit.
-        </p>
-      )}
-      {step === 2 && !isStep2Complete && (
-        <p className="mt-4 text-sm text-slate-400 text-center animate-in fade-in">
-          Lengkapi semua pilihan di Langkah 2 untuk melanjutkan.
-        </p>
-      )}
     </div>
   );
 }

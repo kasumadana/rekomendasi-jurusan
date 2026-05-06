@@ -2,13 +2,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
   PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
-  BarChart, Bar, XAxis, YAxis, CartesianGrid
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, AreaChart, Area
 } from "recharts";
-import Icon from "../components/Icons";
+import { BarChart3, LogOut, Loader2, TrendingUp, Target, Activity } from "lucide-react";
 
-// Slate and Blue palettes from DESIGN.md
-const COLORS_PIE = ["#2563eb", "#10b981", "#64748b", "#f59e0b", "#ef4444"];
-const COLOR_BAR = "#2563eb";
+const COLORS = [
+  "#059669", // Emerald
+  "#2563eb", // Blue
+  "#d97706", // Amber
+  "#dc2626", // Red
+  "#7c3aed", // Violet
+  "#db2777", // Pink
+];
 
 export default function AdminDashboard() {
   const [data, setData] = useState(null);
@@ -21,20 +26,10 @@ export default function AdminDashboard() {
       navigate("/admin");
       return;
     }
-
     fetch("http://localhost:5005/stats")
       .then(res => res.json())
-      .then(res => {
-        if (res.status === "success") {
-          setData(res.data);
-        } else {
-          setError(res.message);
-        }
-      })
-      .catch(err => {
-        setError("Gagal terhubung ke backend.");
-        console.error(err);
-      })
+      .then(res => { if (res.status === "success") setData(res.data); else setError(res.message); })
+      .catch(() => setError("Gagal mengambil data analitik."))
       .finally(() => setLoading(false));
   }, [navigate]);
 
@@ -46,11 +41,9 @@ export default function AdminDashboard() {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white border-none shadow-md rounded-lg p-3 text-slate-800 text-sm">
-          <p className="font-medium mb-1">{label || payload[0].name}</p>
-          <p className="text-blue-600 font-bold">
-            Total: {payload[0].value}
-          </p>
+        <div className="bg-white border-2 border-zinc-900 p-3 shadow-xl">
+          <p className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-1">{label || payload[0].name}</p>
+          <p className="text-sm font-black text-zinc-900">{payload[0].value} Responden</p>
         </div>
       );
     }
@@ -59,231 +52,159 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-[100dvh] flex flex-col items-center justify-center bg-slate-50 font-sans">
-        <Icon name="refresh" className="w-8 h-8 text-blue-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-medium">Memuat data statistik...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-[100dvh] flex flex-col items-center justify-center bg-slate-50 font-sans">
-        <Icon name="exclamation" className="w-12 h-12 text-red-500 mb-4" />
-        <p className="text-slate-800 font-bold mb-2">Terjadi Kesalahan</p>
-        <p className="text-slate-500">{error}</p>
-        <button onClick={handleLogout} className="mt-6 px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition">Kembali</button>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-white">
+        <Loader2 className="w-8 h-8 text-emerald-600 animate-spin mb-4" />
+        <p className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-500">Memuat Inteligensi Sistem...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-[100dvh] bg-slate-50 font-sans pb-16">
+    <div className="min-h-screen bg-zinc-50 font-sans selection:bg-zinc-900 selection:text-white">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
+      <header className="bg-white border-b-2 border-zinc-900 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-sm">
-              <Icon name="chart" className="w-5 h-5" />
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">
-              Dashboard Analitik Navigara
-            </h1>
+          <div className="flex items-center gap-4">
+            {/* <div className="w-10 h-10 bg-zinc-900 rounded-lg flex items-center justify-center">
+              <BarChart3 className="w-6 h-6 text-white" />
+            </div> */}
+            <h1 className="text-2xl font-black uppercase tracking-tighter text-zinc-900">Analitik Sistem.</h1>
           </div>
           <button 
             onClick={handleLogout}
-            className="text-sm font-medium text-slate-500 hover:text-slate-900 flex items-center gap-2 transition-colors bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg"
+            className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600 hover:text-red-600 flex items-center gap-2 transition-colors"
           >
-            Logout
+            <LogOut className="w-3 h-3" />
+            Selesaikan Sesi
           </button>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 pt-10">
-        {/* Top Section (Big Numbers) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-start">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
-                <Icon name="users" className="w-5 h-5" />
-              </div>
-              <h2 className="text-sm font-medium text-slate-500 uppercase tracking-wider">Total Responden</h2>
+      <main className="max-w-7xl mx-auto px-6 py-12 space-y-24">
+        {/* KPI Row */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-10 border-2 border-zinc-300 shadow-sm space-y-4 hover:border-emerald-600 transition-colors">
+            <div className="flex items-center justify-between">
+              <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-600">Total Sampel</h2>
+              <TrendingUp className="w-4 h-4 text-emerald-600" />
             </div>
-            <p className="text-5xl font-extrabold text-blue-600 mt-2">{data?.total_responden || 0}</p>
+            <div className="text-6xl font-black text-zinc-900 tracking-tighter">{data?.total_responden || 0}</div>
           </div>
           
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-start">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                <Icon name="academicCap" className="w-5 h-5" />
-              </div>
-              <h2 className="text-sm font-medium text-slate-500 uppercase tracking-wider">Lanjut Kuliah (Ya)</h2>
+          <div className="bg-white p-10 border-2 border-zinc-300 shadow-sm space-y-4 hover:border-blue-600 transition-colors">
+            <div className="flex items-center justify-between">
+              <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-600">Niat Kuliah</h2>
+              <Target className="w-4 h-4 text-blue-600" />
             </div>
-            <p className="text-5xl font-extrabold text-slate-800 mt-2">
+            <div className="text-6xl font-black text-zinc-900 tracking-tighter">
               {data?.niat_kuliah?.find(d => d.name === "Ya")?.value || 0}
-            </p>
+            </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-start">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center">
-                <Icon name="sparkles" className="w-5 h-5" />
-              </div>
-              <h2 className="text-sm font-medium text-slate-500 uppercase tracking-wider">Lintas Jurusan</h2>
+          <div className="bg-white p-10 border-2 border-zinc-300 shadow-sm space-y-4 hover:border-amber-600 transition-colors">
+            <div className="flex items-center justify-between">
+              <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-600">Lintas Jurusan</h2>
+              <Activity className="w-4 h-4 text-amber-600" />
             </div>
-            <p className="text-5xl font-extrabold text-slate-800 mt-2">
+            <div className="text-6xl font-black text-zinc-900 tracking-tighter">
               {data?.analisis_jalur?.find(d => d.name === "Lintas Jurusan")?.value || 0}
-            </p>
+            </div>
           </div>
-        </div>
+        </section>
 
-        {/* Chart Grid Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100 fill-mode-both">
-          {/* Card Grafik 1 (Pie Chart): Niat Melanjutkan Kuliah */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-800 mb-6 tracking-tight">Niat Melanjutkan Kuliah</h3>
-            <div className="h-64">
-              {data?.niat_kuliah?.length > 0 ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={data.niat_kuliah}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={0}
-                      outerRadius={90}
-                      paddingAngle={2}
-                      dataKey="value"
-                      stroke="none"
-                    >
-                      {data.niat_kuliah.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS_PIE[index % COLORS_PIE.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip content={<CustomTooltip />} />
-                    <Legend iconType="circle" wrapperStyle={{ fontSize: '14px', color: '#64748b' }} />
-                  </PieChart>
-                </ResponsiveContainer>
-              ) : (
-                <div className="h-full flex items-center justify-center text-slate-400">Belum ada data</div>
-              )}
+        {/* Primary Chart Grid */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="bg-white p-8 border-2 border-zinc-300 space-y-10">
+            <h3 className="text-xs font-black uppercase tracking-[0.5em] text-zinc-600 flex items-center gap-4">
+              Analisis Niat Lanjut
+              <div className="h-px bg-zinc-200 flex-1" />
+            </h3>
+            <div className="h-80 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={data?.niat_kuliah} cx="50%" cy="50%" innerRadius={60} outerRadius={100} dataKey="value" strokeWidth={0}>
+                    {data?.niat_kuliah?.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Pie>
+                  <Tooltip content={<CustomTooltip />} />
+                  <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px', fontSize: '11px', fontWeight: 'bold', color: '#334155' }} />
+                </PieChart>
+              </ResponsiveContainer>
             </div>
           </div>
 
-          {/* Card Grafik 2 (Donut Chart): Rencana Sejalur vs Lintas Jurusan */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-800 mb-6 tracking-tight">Sejalur vs Lintas Jurusan</h3>
-            <div className="h-64">
-              {data?.analisis_jalur?.length > 0 ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={data.analisis_jalur}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={90}
-                      paddingAngle={5}
-                      dataKey="value"
-                      stroke="none"
-                    >
-                      {data.analisis_jalur.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS_PIE[(index + 1) % COLORS_PIE.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip content={<CustomTooltip />} />
-                    <Legend iconType="circle" wrapperStyle={{ fontSize: '14px', color: '#64748b' }} />
-                  </PieChart>
-                </ResponsiveContainer>
-              ) : (
-                <div className="h-full flex items-center justify-center text-slate-400">Belum ada data</div>
-              )}
+          <div className="bg-white p-8 border-2 border-zinc-300 space-y-10">
+            <h3 className="text-xs font-black uppercase tracking-[0.5em] text-zinc-600 flex items-center gap-4">
+              Sebaran Linearitas
+              <div className="h-px bg-zinc-200 flex-1" />
+            </h3>
+            <div className="h-80 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={data?.analisis_jalur}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 800, fill: '#475569' }} dy={10} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 800, fill: '#475569' }} />
+                  <Tooltip cursor={{ fill: '#f1f5f9' }} content={<CustomTooltip />} />
+                  <Bar dataKey="value" barSize={50}>
+                    {data?.analisis_jalur?.map((_, i) => <Cell key={i} fill={COLORS[(i + 2) % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           </div>
+        </section>
 
-          {/* Card Grafik 3 (Bar Chart Horizontal): Demografi Asal Jurusan */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-800 mb-6 tracking-tight">Demografi Asal Jurusan</h3>
-            <div className="h-64">
-              {data?.demografi_asal?.length > 0 ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={data.demografi_asal} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#e2e8f0" />
-                    <XAxis type="number" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
-                    <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
-                    <Tooltip cursor={{ fill: '#f8fafc' }} content={<CustomTooltip />} />
-                    <Bar dataKey="value" fill={COLOR_BAR} radius={[0, 4, 4, 0]} barSize={24} />
-                  </BarChart>
-                </ResponsiveContainer>
-              ) : (
-                <div className="h-full flex items-center justify-center text-slate-400">Belum ada data</div>
-              )}
-            </div>
+        {/* New Chart: Hobi & Aktivitas */}
+        <section className="bg-white p-10 border-2 border-zinc-300 space-y-12">
+          <h3 className="text-xs font-black uppercase tracking-[0.5em] text-zinc-600 flex items-center gap-4">
+            Distribusi Minat & Aktivitas Pilihan
+            <div className="h-px bg-zinc-200 flex-1" />
+          </h3>
+          <div className="h-96 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={data?.top_hobi}>
+                <defs>
+                  <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#059669" stopOpacity={0.2}/>
+                    <stop offset="95%" stopColor="#059669" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 800, fill: '#475569' }} dy={10} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 800, fill: '#475569' }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Area type="monotone" dataKey="value" stroke="#059669" strokeWidth={4} fillOpacity={1} fill="url(#colorValue)" />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
+        </section>
 
-          {/* Card Grafik 4 (Bar Chart Vertical): Top 5 Hobi Terpopuler */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-800 mb-6 tracking-tight">Top 5 Hobi Terpopuler</h3>
-            <div className="h-64">
-              {data?.top_hobi?.length > 0 ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={data.top_hobi} margin={{ top: 5, right: 0, left: -20, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} dy={10} />
-                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
-                    <Tooltip cursor={{ fill: '#f8fafc' }} content={<CustomTooltip />} />
-                    <Bar dataKey="value" fill="#10b981" radius={[4, 4, 0, 0]} maxBarSize={48} />
-                  </BarChart>
-                </ResponsiveContainer>
-              ) : (
-                <div className="h-full flex items-center justify-center text-slate-400">Belum ada data</div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* List Section: Top 5 Rekomendasi Jurusan AI */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200 fill-mode-both">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center">
-              <Icon name="sparkles" className="w-5 h-5" />
-            </div>
-            <h3 className="text-xl font-bold text-slate-800 tracking-tight">Top 5 Rekomendasi Jurusan AI</h3>
-          </div>
-          
-          {data?.top_rekomendasi?.length > 0 ? (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-slate-200 text-slate-500 text-sm uppercase tracking-wider">
-                    <th className="py-4 px-4 font-medium">Peringkat</th>
-                    <th className="py-4 px-4 font-medium">Program Studi (Jurusan)</th>
-                    <th className="py-4 px-4 font-medium text-right">Jumlah Rekomendasi</th>
+        {/* Data Table */}
+        <section className="space-y-8 pb-20">
+          <h3 className="text-xs font-black uppercase tracking-[0.5em] text-zinc-600 flex items-center gap-4">
+            Prioritas Rekomendasi AI
+            <div className="h-px bg-zinc-200 flex-1" />
+          </h3>
+          <div className="bg-white border-2 border-zinc-900 overflow-hidden shadow-2xl">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="bg-zinc-900 text-white text-[10px] font-black uppercase tracking-[0.4em]">
+                  <th className="py-6 px-8">Peringkat</th>
+                  <th className="py-6 px-8">Spesialisasi</th>
+                  <th className="py-6 px-8 text-right">Jumlah</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data?.top_rekomendasi?.map((item, i) => (
+                  <tr key={i} className="border-b border-zinc-200 hover:bg-zinc-50 transition-colors group">
+                    <td className="py-6 px-8 text-sm font-black text-zinc-500 group-hover:text-emerald-600 transition-colors">0{i + 1}</td>
+                    <td className="py-6 px-8 text-sm font-bold text-zinc-900 uppercase tracking-widest">{item.name}</td>
+                    <td className="py-6 px-8 text-sm font-black text-emerald-600 text-right">{item.value}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {data.top_rekomendasi.map((item, index) => (
-                    <tr key={index} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                      <td className="py-4 px-4 font-semibold text-slate-800">
-                        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 text-slate-600 text-sm">
-                          {index + 1}
-                        </span>
-                      </td>
-                      <td className="py-4 px-4 font-medium text-slate-800">{item.name}</td>
-                      <td className="py-4 px-4 font-bold text-blue-600 text-right">{item.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <div className="py-12 flex flex-col items-center justify-center text-slate-400 bg-slate-50 rounded-xl border border-slate-100">
-              <Icon name="academicCap" className="w-8 h-8 mb-2 opacity-50" />
-              <p>Belum ada data rekomendasi AI.</p>
-            </div>
-          )}
-        </div>
-
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </main>
     </div>
   );

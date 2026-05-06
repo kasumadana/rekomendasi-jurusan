@@ -1,10 +1,10 @@
 // src/components/ProgressBar.jsx
 
-export default function ProgressBar({ currentStep }) {
-  const total = 3;
+export default function ProgressBar({ currentStep, maxSteps = 3 }) {
+  const steps = Array.from({ length: maxSteps }, (_, i) => i + 1);
   return (
     <div className="w-full flex gap-2">
-      {[1, 2, 3].map((step) => {
+      {steps.map((step) => {
         const isActive = currentStep === step;
         const isDone = currentStep > step;
         return (
@@ -14,7 +14,7 @@ export default function ProgressBar({ currentStep }) {
                 isActive ? "bg-zinc-950" : isDone ? "bg-zinc-300" : "bg-zinc-100"
               }`}
             />
-            <div className={`text-[9px] font-black uppercase tracking-[0.3em] ${isActive ? "text-zinc-950" : "text-zinc-300"}`}>
+            <div className={`text-[9px] font-black uppercase tracking-[0.2em] ${isActive ? "text-zinc-950" : "text-zinc-400"}`}>
               TAHAP 0{step}
             </div>
           </div>

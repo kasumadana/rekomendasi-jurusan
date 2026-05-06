@@ -1,9 +1,30 @@
-import { MapPin, RotateCcw, GraduationCap, Trophy } from "lucide-react";
+import { MapPin, RotateCcw, Search, Trophy } from "lucide-react";
 
-export default function RecommendationResult({ rekomendasi, formData, onReset }) {
+export default function RecommendationResult({ rekomendasi, formData, onReset, isEarlyExit }) {
   const hasResult = rekomendasi && rekomendasi.length > 0;
   const topMatch = hasResult ? rekomendasi[0] : null;
   const alternatives = hasResult ? rekomendasi.slice(1) : [];
+
+  if (isEarlyExit) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center text-center space-y-12">
+        <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.85] text-zinc-950">
+          Terima <br />
+          <span className="text-blue-600">Kasih.</span>
+        </h1>
+        <p className="max-w-xl text-lg font-bold text-zinc-500 uppercase tracking-widest leading-relaxed">
+          Tanggapan Anda telah berhasil disimpan di sistem Navigara. Semoga sukses dengan rencana masa depan Anda!
+        </p>
+        <button
+          onClick={onReset}
+          className="group flex items-center gap-3 px-8 py-4 border-2 border-zinc-900 bg-white text-xs font-black uppercase tracking-[0.3em] text-zinc-900 hover:bg-zinc-900 hover:text-white transition-all shadow-[4px_4px_0px_0px_rgba(24,24,27,1)] hover:shadow-none hover:translate-y-1"
+        >
+          <RotateCcw className="w-4 h-4 group-hover:-rotate-90 transition-transform" />
+          Kembali ke Awal
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-32">
@@ -12,16 +33,16 @@ export default function RecommendationResult({ rekomendasi, formData, onReset })
         <div className="max-w-2xl">
           <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.85] text-zinc-950">
             Diagnosis<br />
-            <span className="text-emerald-600">Selesai.</span>
+            <span className="text-blue-600">Selesai.</span>
           </h1>
           <p className="mt-8 text-lg font-bold text-zinc-500 uppercase tracking-widest leading-relaxed">
-            Analisis Profil <span className="text-zinc-950 border-b-2 border-emerald-200">{formData.jurusan_smk}</span> &bull; Target Industri <span className="text-zinc-950 border-b-2 border-blue-200">{formData.target_industri}</span>
+            Analisis Profil <span className="text-zinc-950 border-b-2 border-blue-200">{formData.jurusan_smk}</span> &bull; Target Industri <span className="text-zinc-950 border-b-2 border-blue-200">{formData.target_industri}</span>
           </p>
         </div>
         
         <button
           onClick={onReset}
-          className="group flex items-center gap-3 text-xs font-black uppercase tracking-[0.3em] text-zinc-500 hover:text-emerald-600 transition-colors"
+          className="group flex items-center gap-3 text-xs font-black uppercase tracking-[0.3em] text-zinc-500 hover:text-blue-600 transition-colors"
         >
           <RotateCcw className="w-4 h-4 group-hover:rotate-[-45deg] transition-transform" />
           Ulangi Tes
@@ -33,7 +54,7 @@ export default function RecommendationResult({ rekomendasi, formData, onReset })
           {/* Top Recommendation */}
           <section className="grid grid-cols-1 md:grid-cols-12 gap-16">
             <div className="md:col-span-5 space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-[0.4em]">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.4em]">
                 <Trophy className="w-3 h-3" />
                 Kecocokan Tertinggi
               </div>
@@ -43,7 +64,7 @@ export default function RecommendationResult({ rekomendasi, formData, onReset })
               <div className="flex items-center gap-10">
                 <div className="space-y-1">
                   <div className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Skor</div>
-                  <div className="text-5xl font-black text-emerald-600">{topMatch.persentase}%</div>
+                  <div className="text-5xl font-black text-blue-600">{topMatch.persentase}%</div>
                 </div>
                 <div className="h-12 w-px bg-zinc-200" />
                 <div className="text-sm font-bold text-zinc-600 leading-relaxed">
@@ -61,19 +82,24 @@ export default function RecommendationResult({ rekomendasi, formData, onReset })
               <div className="grid grid-cols-1 gap-6">
                 {topMatch.universitas && topMatch.universitas.length > 0 ? (
                   topMatch.universitas.map((univ) => (
-                    <div key={univ.nama} className="group p-8 border-2 border-zinc-200 hover:border-emerald-600 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white shadow-sm">
+                    <div key={univ.nama} className="group p-8 border-2 border-zinc-200 hover:border-blue-600 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white shadow-sm rounded-xl">
                       <div className="space-y-3">
                         <div className="inline-block px-2 py-1 bg-zinc-100 text-[9px] font-black uppercase tracking-widest text-zinc-600">{univ.jenis}</div>
-                        <h4 className="text-xl font-bold text-zinc-950 group-hover:text-emerald-600 transition-colors">{univ.nama}</h4>
+                        <h4 className="text-xl font-bold text-zinc-950 group-hover:text-blue-600 transition-colors">{univ.nama}</h4>
                         <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-500 uppercase tracking-widest">
                           <MapPin className="w-3 h-3" />
                           {univ.lokasi}
                         </div>
                       </div>
-                      <button className="px-6 py-3 border-2 border-zinc-950 text-xs font-black uppercase tracking-widest group-hover:bg-zinc-950 group-hover:text-white transition-all flex items-center gap-2">
-                        <GraduationCap className="w-3 h-3" />
-                        Lihat Detail
-                      </button>
+                      <a 
+                        href={`https://www.google.com/search?q=${encodeURIComponent(topMatch.jurusan + " " + univ.nama)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-6 py-3 border-2 border-zinc-950 text-xs font-black uppercase tracking-widest group-hover:bg-zinc-950 group-hover:text-white transition-all flex items-center gap-2 rounded-lg shrink-0"
+                      >
+                        <Search className="w-3 h-3" />
+                        Pelajari di Google
+                      </a>
                     </div>
                   ))
                 ) : (
@@ -91,7 +117,7 @@ export default function RecommendationResult({ rekomendasi, formData, onReset })
               <h2 className="text-xs font-black uppercase tracking-[0.5em] text-zinc-500 mb-16">Rekomendasi Lainnya</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {alternatives.map((item, idx) => (
-                  <div key={item.jurusan + idx} className="space-y-8 p-10 bg-white border-2 border-zinc-200 hover:border-blue-600 transition-all group">
+                  <div key={item.jurusan + idx} className="space-y-8 p-10 bg-white border-2 border-zinc-200 hover:border-blue-600 transition-all group rounded-xl">
                     <div className="flex items-end justify-between">
                       <div className="space-y-2">
                         <div className="text-[10px] font-black uppercase tracking-widest text-blue-600">Alternatif 0{idx + 1}</div>

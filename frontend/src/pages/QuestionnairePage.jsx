@@ -23,17 +23,29 @@ export default function QuestionnairePage() {
     jenis_pt: "",
   });
 
+  const isEarlyExit = formData.minat_kuliah === "Tidak" || formData.minat_kuliah === "Belum Tahu";
+  const maxSteps = isEarlyExit ? 2 : 4;
+
   const handleChange = (field, value) => {
     setFormData((prev) => {
-      if (field === "minat_kuliah" && value !== "Ya") {
-        return { ...prev, [field]: value, lintas_jurusan: "" };
+      let updated = { ...prev, [field]: value };
+      if (field === "minat_kuliah") {
+        if (value !== "Ya") {
+          updated.lintas_jurusan = "";
+          updated.mapel_favorit = [];
+          updated.tipe_kerja = "";
+          updated.sosial = "";
+          updated.target_industri = "";
+          updated.lokasi_provinsi = "";
+          updated.jenis_pt = "";
+        }
       }
-      return { ...prev, [field]: value };
+      return updated;
     });
     setError(null);
   };
 
-  const handleNext = () => setStep((s) => Math.min(s + 1, 3));
+  const handleNext = () => setStep((s) => Math.min(s + 1, maxSteps));
   const handleBack = () => setStep((s) => Math.max(s - 1, 1));
 
   const handleSubmit = async () => {
@@ -55,7 +67,13 @@ export default function QuestionnairePage() {
       const data = await response.json();
 
       if (data.status === "success") {
-        navigate("/hasil", { state: { rekomendasi: data.rekomendasi, formData: payload } });
+        navigate("/hasil", { 
+          state: { 
+            rekomendasi: data.rekomendasi, 
+            formData: payload, 
+            isEarlyExit: data.is_early_exit 
+          } 
+        });
       } else {
         setError(data.message || "Terjadi kesalahan dari server.");
       }
@@ -67,27 +85,27 @@ export default function QuestionnairePage() {
   };
 
   return (
-    <div className="bg-white min-h-[calc(100vh-64px)] py-20">
+    <div className="bg-zinc-50 min-h-[calc(100vh-64px)] py-16 sm:py-24 font-sans text-zinc-900 selection:bg-zinc-900 selection:text-white">
       <div className="max-w-3xl mx-auto px-6">
-        <div className="mb-16 flex items-center justify-between">
+        <div className="mb-12 flex items-center justify-between">
           <button 
             onClick={() => navigate("/")}
-            className="group flex items-center gap-2 text-xs font-black uppercase tracking-widest text-zinc-400 hover:text-zinc-950 transition-colors"
+            className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 transition-colors"
           >
-            <ArrowLeft className="w-3 h-3 transition-transform group-hover:-translate-x-1" />
-            Keluar Tes
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            Batal
           </button>
           
-          <div className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-300">
-            Tahap 0{step} / 03
+          <div className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400">
+            Tahap 0{step} / 0{maxSteps}
           </div>
         </div>
 
-        <ProgressBar currentStep={step} />
+        <ProgressBar currentStep={step} maxSteps={maxSteps} />
 
-        <div className="mt-20">
+        <div className="mt-16">
           {error && (
-            <div className="mb-10 p-4 bg-red-50 text-red-600 text-xs font-bold uppercase tracking-widest border-l-4 border-red-600">
+            <div className="mb-10 p-5 bg-red-50 text-red-700 text-sm font-semibold border-l-4 border-red-600">
               {error}
             </div>
           )}
@@ -100,6 +118,7 @@ export default function QuestionnairePage() {
             onBack={handleBack}
             onSubmit={handleSubmit}
             loading={loading}
+            isEarlyExit={isEarlyExit}
           />
         </div>
       </div>

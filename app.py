@@ -32,26 +32,34 @@ def prediksi():
     lokasi_provinsi = data.get("lokasi_provinsi", "").strip()
     jenis_pt        = data.get("jenis_pt", "").strip()
 
-    required = [jurusan_smk, mapel_favorit, hobi_spesifik, tipe_kerja, sosial, target_industri]
+    is_early_exit = minat_kuliah in ["Tidak", "Belum Tahu"]
+
+    if is_early_exit:
+        required = [jurusan_smk, hobi_spesifik]
+    else:
+        required = [jurusan_smk, mapel_favorit, hobi_spesifik, tipe_kerja, sosial, target_industri]
+
     if not all(required):
         return jsonify({
             "status" : "error",
             "message": "Field wajib tidak lengkap. Pastikan semua pertanyaan kuesioner terisi."
         }), 400
 
-    # ── Panggil engine rekomendasi ─────────────────────────────────────────────
-    hasil = dapatkan_rekomendasi(
-        jurusan_smk     = jurusan_smk,
-        mapel_favorit   = mapel_favorit,
-        hobi_spesifik   = hobi_spesifik,
-        tipe_kerja      = tipe_kerja,
-        sosial          = sosial,
-        target_industri = target_industri,
-        lokasi_provinsi = lokasi_provinsi,
-        jenis_pt        = jenis_pt,
-    )
+    # ── Panggil engine rekomendasi (jika bukan early exit) ─────────────────────
+    hasil = []
+    if not is_early_exit:
+        hasil = dapatkan_rekomendasi(
+            jurusan_smk     = jurusan_smk,
+            mapel_favorit   = mapel_favorit,
+            hobi_spesifik   = hobi_spesifik,
+            tipe_kerja      = tipe_kerja,
+            sosial          = sosial,
+            target_industri = target_industri,
+            lokasi_provinsi = lokasi_provinsi,
+            jenis_pt        = jenis_pt,
+        )
 
-    top_rekomendasi = hasil[0]["program_studi"] if hasil and len(hasil) > 0 else ""
+    top_rekomendasi = hasil[0]["jurusan"] if hasil and len(hasil) > 0 else ""
 
     # ── Simpan raw response ke CSV ───────────────────────────────────────────
     try:
@@ -79,6 +87,7 @@ def prediksi():
     return jsonify({
         "status"      : "success",
         "rekomendasi" : hasil,
+        "is_early_exit": is_early_exit
     })
 
 
@@ -98,7 +107,7 @@ def stats():
         })
 
     try:
-        df = pd.read_csv(SURVEY_FILE)
+        df = pd.read_csv(SURVEY_FILE).fillna("")
         total_responden = int(len(df))
         
         # 1. niat_kuliah

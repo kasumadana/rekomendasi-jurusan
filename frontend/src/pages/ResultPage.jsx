@@ -9,7 +9,7 @@ export default function ResultPage() {
     return <Navigate to="/kuesioner" replace />;
   }
 
-  const { rekomendasi, formData } = location.state;
+  const { rekomendasi, formData, isEarlyExit } = location.state;
 
   return (
     <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 pt-8 pb-16">
@@ -17,6 +17,7 @@ export default function ResultPage() {
         rekomendasi={rekomendasi} 
         formData={formData} 
         onReset={() => navigate("/kuesioner")} 
+        isEarlyExit={isEarlyExit}
       />
     </div>
   );

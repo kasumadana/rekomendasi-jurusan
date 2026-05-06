@@ -1,2 +1,28 @@
-minat_kuliah,lintas_jurusan,jurusan_smk,mapel_favorit,hobi_spesifik,tipe_kerja,sosial,target_industri,lokasi_provinsi,jenis_pt
-Ya,Sejalur,Rekayasa Perangkat Lunak,Matematika,Coding,Layar Komputer,Tim,Teknologi,,
+minat_kuliah,lintas_jurusan,jurusan_smk,mapel_favorit,hobi_spesifik,tipe_kerja,sosial,target_industri,lokasi_provinsi,jenis_pt,top_rekomendasi
+Ya,Sejalur,Teknik Komputer Dan Jaringan,Matematika,Coding,Layar Komputer,Tim,Teknologi,Bali,,Teknik Informatika
+Ya,Sejalur,Produksi Film,Seni Budaya,Fotografi/Video,Lapangan,Tim,Media,Bali,PTN,Televisi dan Film
+Ya,Sejalur,Desain Komunikasi Visual,"Seni Budaya, Bahasa Inggris",Menggambar,Layar Komputer,Mandiri,Industri Kreatif,Bali,,Animasi
+Belum Tahu,,Teknik Sepeda Motor,,Bongkar Mesin,,,,,,
+Tidak,,Teknik Audio Video,,Sound Engineering,,,,,,
+Ya,Lintas Jurusan,Teknik Kendaraan Ringan,Matematika,Coding,Layar Komputer,Tim,Teknologi,Bali,,Teknik Informatika
+Ya,Sejalur,Rekayasa Perangkat Lunak,Matematika,Pemrograman,Layar Komputer,Mandiri,Teknologi,Jawa Timur,PTN,Ilmu Komputer
+Ya,Sejalur,Rekayasa Perangkat Lunak,Matematika,Menganalisis Data,Layar Komputer,Mandiri,Teknologi,DKI Jakarta,,Sains Data
+Ya,Lintas Jurusan,Rekayasa Perangkat Lunak,Seni Budaya,Desain UI/UX (Rasio Emas),Layar Komputer,Tim,Industri Kreatif,Bali,PTN,Desain Komunikasi Visual
+Tidak,,Teknik Pemesinan,,CNC Programming,,,,,,
+Ya,Sejalur,Teknik Pemesinan,Fisika,Bongkar Mesin,Laboratorium,Mandiri,Manufaktur,Jawa Barat,Institut,Teknik Mesin
+Ya,Sejalur,Teknik Instalasi Dan Tenaga Listrik,Fisika,Perancangan Panel Listrik,Lapangan,Tim,Konstruksi,Bali,Politeknik,Teknik Elektro
+Belum Tahu,,Desain Pemodelan Dan Informasi Bangunan,,Maket Arsitektur,,,,,,
+Ya,Sejalur,Desain Pemodelan Dan Informasi Bangunan,Matematika,Menghitung Struktur,Layar Komputer,Mandiri,Konstruksi,Bali,PTN,Arsitektur
+Ya,Lintas Jurusan,Teknik Komputer Dan Jaringan,Bahasa Inggris,Menulis Cerita,Layar Komputer,Mandiri,Media,DKI Jakarta,PTS,Ilmu Komunikasi
+Tidak,,Teknik Sepeda Motor,,Tuning Mesin,,,,,,
+Ya,Sejalur,Desain Komunikasi Visual,Seni Budaya,Motion Graphics,Studio,Tim,Industri Kreatif,Jawa Barat,Institut,Televisi dan Film
+Ya,Lintas Jurusan,Teknik Konstruksi Dan Perumahan,Ekonomi,Manajemen Bisnis,Layar Komputer,Tim,Bisnis,Bali,PTN,Manajemen Bisnis
+Ya,Sejalur,Teknik Pendingin Tata Udara Dan Pemanasan,Fisika,Kalkulasi HVAC,Lapangan,Tim,Manufaktur,Jawa Timur,Politeknik,Teknik Mesin
+Belum Tahu,,Produksi Film,,Editing Video,,,,,,
+Ya,Sejalur,Teknik Kendaraan Ringan,Fisika,Bongkar Mesin,Lapangan,Tim,Otomotif,Jawa Tengah,PTN,Teknik Otomotif
+Tidak,,Rekayasa Perangkat Lunak,,Mobile App Development,,,,,,
+Ya,Lintas Jurusan,Teknik Audio Video,Bahasa Inggris,Digital Marketing,Layar Komputer,Tim,Bisnis,Bali,PTS,Manajemen Bisnis
+Ya,Sejalur,Teknik Komputer Dan Jaringan,Matematika,Keamanan Jaringan,Layar Komputer,Tim,Teknologi,Jawa Barat,Institut,Teknik Telekomunikasi
+Ya,Sejalur,Desain Pemodelan Dan Informasi Bangunan,Seni Budaya,Desain Interior,Studio,Mandiri,Konstruksi,Bali,PTN,Arsitektur
+Belum Tahu,,Teknik Instalasi Dan Tenaga Listrik,,Otomasi Industri,,,,,,
+Ya,Lintas Jurusan,Teknik Pemesinan,Seni Budaya,Fotografi Produk,Studio,Mandiri,Industri Kreatif,Bali,PTN,Fotografi

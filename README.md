@@ -24,8 +24,6 @@ Backend Navigara bertugas memproses algoritma rekomendasi dan menyimpan respons 
 ```bash
 # Pastikan terminal mengarah ke folder utama proyek
 cd rekomendasi-jurusan
-
-# (Catatan: Jika file backend Anda letakkan dalam folder khusus bernama "backend", gunakan cd backend)
 ```
 
 **Langkah 2: Buat Virtual Environment (Sangat Disarankan)**
